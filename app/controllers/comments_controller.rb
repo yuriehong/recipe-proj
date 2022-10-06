@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
     end
 
     def authorize
-        render json: {error: "Please sign in to add a moment" }, status: :unauthorized unless session.include? :current_user
+        render json: {error: "Please sign in to add a comment" }, status: :unauthorized unless session.include? :current_user
     end
     
     def invalid

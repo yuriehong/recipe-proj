@@ -1,7 +1,7 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  resources :comments
-  resources :recipes
+  resources :comments, only: [:index, :show, :create, :destroy, :update]
+  resources :recipes, only: [:index, :show, :create, :destroy, :update]
   resources :users
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
