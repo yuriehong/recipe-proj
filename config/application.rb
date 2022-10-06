@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 # config/application.rb
 module RecipeProj
   class Application < Rails::Application
-    config.load_defaults 7.0
+    config.load_defaults 6.1
 
     # This is set in apps generated with the --api flag, and removes session/cookie middleware
     config.api_only = true

@@ -1,6 +1,13 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  get '/hello', to: 'application#hello_world'
+  resources :comments
+  resources :recipes
+  resources :users
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  # get '/hello', to: 'application#hello_world'
 
   get '*path',
       to: 'fallback#index',
