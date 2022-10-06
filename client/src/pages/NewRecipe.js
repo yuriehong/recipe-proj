@@ -7,12 +7,9 @@ import { Button, FormField, Input, Label, Textarea } from "../styles";
 function NewRecipe({ user }) {
   const [name, setName] = useState("Recipe title");
   const [image, setImage] = useState("Image url");
-
   const [category, setCategory] = useState("Recipe Category");
-
   const [description, setDescription] = useState("Recipe Description");
   const [instructions, setInstructions] = useState("Instructions");
-
   const [ingredients, setIngredients] = useState("Ingredients");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,13 +29,23 @@ function NewRecipe({ user }) {
         category,
         description,
         ingredients,
-        instructions      }),
+        instructions,
+      "user_id": user.id      }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
+        // setName("Recipe title")
+        // setImage("Image url")
+        // setCategory("Recipe Category")
+        // setDescription("Recipe Description")
+        // setInstructions("Instructions")
+        // setIngredients("Ingredients")
+        // setErrors([])
         history.push("/");
+       
+        
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => setErrors(err.error));
       }
     });
   }
@@ -107,16 +114,12 @@ function NewRecipe({ user }) {
               {isLoading ? "Loading..." : "Submit Recipe"}
             </Button>
           </FormField>
-          <FormField>
-            {/* {errors.map((err) => (
-              <Error key={err}>{err}</Error>
-            ))} */}
-                
+          <FormField>             
       {errors? <div>{errors}</div>:null}
           </FormField>
         </form>
       </WrapperChild>
-      <WrapperChild>
+      {/* <WrapperChild>
         <h1>{name}</h1>
         <div>
         <p>
@@ -129,7 +132,7 @@ function NewRecipe({ user }) {
 
         <ReactMarkdown>{ingredients}</ReactMarkdown>
         <ReactMarkdown>{instructions}</ReactMarkdown>
-      </WrapperChild>
+      </WrapperChild> */}
     </Wrapper>
   );
 }

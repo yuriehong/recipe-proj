@@ -12,19 +12,25 @@ class CommentsController < ApplicationController
     end
 
     def show
-        comment = comment.find(params[:id])
+        comment = Comment.find(params[:id])
         render json: comment, status: :ok
     end
 
     def create
-        recipe = Comment.create!(comment_params)
+        comment = Comment.create!(comment_params)
         render json: comment, status: :created
 
     end
 
     def destroy
-        comment.find(params[:id]).destroy
+        Comment.find(params[:id]).destroy
         head :no_content
+    end
+
+    def update
+        comment = Comment.find(params[:id])
+        comment.update(comment_params)
+        render json: comment, status: :ok
     end
 
     private 

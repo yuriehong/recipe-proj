@@ -21,7 +21,7 @@ function LoginForm({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => onLogin(user));
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => setErrors(err.error));
       }
     });
   }
@@ -53,9 +53,7 @@ function LoginForm({ onLogin }) {
           {isLoading ? "Loading..." : "Login"}
         </Button>
       </FormField>
-      <div>
-      {errors? <p>{errors}</p>:null}
-      </div>
+      <em>{errors? <p>{errors} </p> : null} </em>
     </form>
   );
 }

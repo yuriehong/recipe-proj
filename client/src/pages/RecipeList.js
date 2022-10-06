@@ -7,11 +7,24 @@ import { Box, Button } from "../styles";
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
 
+//get recipes
   useEffect(() => {
     fetch("/recipes")
       .then((r) => r.json())
       .then(setRecipes);
   }, []);
+
+ //delete recipe method
+  function handleDelete(id) {
+    fetch(`/recipes/${id}`, { method: "DELETE" })
+    .then(res => res.json())
+    .then(res => console.log(res)) 
+
+    // fetch("/recipes")
+    //     .then((r) => r.json())
+    //     .then(setRecipes);
+    
+  }
 
   return (
     <Wrapper>
@@ -19,7 +32,10 @@ function RecipeList() {
         recipes.map((recipe) => (
           <Recipe key={recipe.id}>
             <Box>
+              <Button onClick = {handleDelete(recipe.id)}>Delete</Button>
+              <Button>Edit Recipe</Button>
               <h2>{recipe.name}</h2>
+              <img src ={recipe.image} alt = {recipe.name}/>
               <p>
                 <em>Category: {recipe.category}</em>
                 &nbsp;·&nbsp;
