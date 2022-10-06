@@ -20,7 +20,7 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   return (
-    <>
+    <div>
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
@@ -32,7 +32,7 @@ function App() {
           </Route>
         </Switch>
       </main>
-    </>
+    </div>
   );
 }
 

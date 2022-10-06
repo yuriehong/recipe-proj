@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
-import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
+import { Button, FormField, Input, Label, Textarea } from "../styles";
 
 function NewRecipe({ user }) {
   const [name, setName] = useState("Recipe title");
@@ -108,20 +108,24 @@ function NewRecipe({ user }) {
             </Button>
           </FormField>
           <FormField>
-            {errors.map((err) => (
+            {/* {errors.map((err) => (
               <Error key={err}>{err}</Error>
-            ))}
+            ))} */}
+                
+      {errors? <div>{errors}</div>:null}
           </FormField>
         </form>
       </WrapperChild>
       <WrapperChild>
         <h1>{name}</h1>
+        <div>
         <p>
           <em>Category: {category} </em>
           &nbsp;·&nbsp;
           <cite>By {user.username}</cite>
         </p>
         <p><em>Description</em>: {description}</p>
+        </div>
 
         <ReactMarkdown>{ingredients}</ReactMarkdown>
         <ReactMarkdown>{instructions}</ReactMarkdown>

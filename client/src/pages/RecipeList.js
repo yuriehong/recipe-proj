@@ -23,7 +23,7 @@ function RecipeList() {
               <p>
                 <em>Category: {recipe.category}</em>
                 &nbsp;·&nbsp;
-                <cite>By {recipe.user.username}</cite>
+                {/* <cite>By {recipe.user.username}</cite> */}
               </p>
               <p><em>Description</em>: {recipe.description}</p>
               <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>

@@ -31,9 +31,9 @@ class RecipesController < ApplicationController
        params.permit([:name, :category, :image, :description, :ingredients, :instructions, :user_id]) 
     end
 
-    def authorize
-        render json: {error: "Please sign in to add a moment" }, status: :unauthorized unless session.include? :current_user
-    end
+    # def authorize
+    #     render json: {error: "Please sign in to add a recipe" }, status: :unauthorized unless session.include? :user_id
+    # end
     
     def invalid
         render json: { error: "Invalid" }, status: :unprocessable_entity

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Error, Input, FormField, Label } from "../styles";
+import { Button, Input, FormField, Label } from "../styles";
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -53,9 +53,9 @@ function LoginForm({ onLogin }) {
           {isLoading ? "Loading..." : "Login"}
         </Button>
       </FormField>
-      <Error>
-      {errors? <div>{errors}</div>:null}
-      </Error>
+      <div>
+      {errors? <p>{errors}</p>:null}
+      </div>
     </form>
   );
 }

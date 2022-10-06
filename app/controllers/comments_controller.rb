@@ -32,10 +32,7 @@ class CommentsController < ApplicationController
        params.permit([:rating, :description, :recipe_id, :user_id]) 
     end
 
-    def authorize
-        render json: {error: "Please sign in to add a comment" }, status: :unauthorized unless session.include? :current_user
-    end
-    
+
     def invalid
         render json: { error: "Invalid" }, status: :unprocessable_entity
     end

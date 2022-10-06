@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Error, Input, FormField, Label } from "../styles";
+import { Button, Input, FormField, Label } from "../styles";
 
 function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -82,9 +82,11 @@ function SignUpForm({ onLogin }) {
       <FormField>
         <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
       </FormField>
-      <Error>
+      <FormField>
       {errors? <div>{errors}</div>:null}
-      </Error>
+      </FormField>
+     
+    
       {/* <FormField>
         {errors.map((err) => (
           <Error key={err}>{err}</Error>
