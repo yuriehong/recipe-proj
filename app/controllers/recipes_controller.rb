@@ -2,11 +2,11 @@ class RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
 
     before_action :authorize
-    skip_before_action :authorize, only: [:index, :create, :show]
+    skip_before_action :authorize, only: [:create]
 
 
     def index
-        recipes = Recipe.all
+        recipes = @current_user.recipes
         render json: recipes, status: :ok
     end
 
@@ -19,6 +19,7 @@ class RecipesController < ApplicationController
         recipe = Recipe.create!(recipe_params)
         render json: recipe, status: :created
     end
+
     def update
         recipe = Recipe.find(params[:id])
         recipe.update(recipe_params)

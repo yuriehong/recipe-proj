@@ -86,12 +86,6 @@ function SignUpForm({ onLogin }) {
       {errors? <div>{errors}</div>:null}
       </FormField>
      
-    
-      {/* <FormField>
-        {errors.map((err) => (
-          <Error key={err}>{err}</Error>
-        ))}
-      </FormField> */}
     </form>
   );
 }
