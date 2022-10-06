@@ -9,7 +9,11 @@ function NavBar({ user, setUser }) {
       if (r.ok) {
         setUser(null);
       }
+      else{
+        console.log("Unable to logout")
+      }
     });
+    
   }
 
   return (
@@ -37,9 +41,9 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
+  font-family: "Comic Sans";
   font-size: 3rem;
-  color: deeppink;
+  color: lightpink;
   margin: 0;
   line-height: 1;
 
