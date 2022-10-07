@@ -28,6 +28,7 @@ function NavBar({ user, setUser }) {
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
+        <h4>Welcome <em>{user.username}</em></h4>
       </Nav>
     </Wrapper>
   );

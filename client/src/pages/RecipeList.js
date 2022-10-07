@@ -7,17 +7,20 @@ import Recipe from "./Recipe.js"
 
 function RecipeList({user}) {
   const [recipes, setRecipes] = useState([]);
+  const [category, setCategory] = useState("All")
 
-
+//removes recipe for the frontend
 function onRemoveRecipe(recipe) {
     setRecipes(recipes.filter((s) => s.id !== recipe.id))
   }
 
+//refreshes the recipes
 function onUpdateRecipe(){
   fetch("/recipes")
       .then((r) => r.json())
       .then(setRecipes);
   }
+
 //get recipes
   useEffect(() => {
     fetch("/recipes")
@@ -25,11 +28,28 @@ function onUpdateRecipe(){
       .then(setRecipes);
   }, []);
 
+  //filter by category type
+  let recipesToDisplay = recipes.filter(item => {
+    if (category === "All") {
+      return true
+    }
+    else {
+      return (item.category === category)
+    }
+  });
 
   return (
     <Wrapper>
+      <select id="selectform" value={category} onChange={(e) => setCategory(e.target.value)} >
+            <option value="All">Filter By Category</option>
+            <option value="Cookies">Cookies</option>
+            <option value="Bars">Bars</option>
+            <option value="Cakes">Cakes</option>
+            <option value="Breads">Breads</option>
+            <option value="Other">Other</option>
+          </select>
       {recipes.length > 0 ? (
-        recipes.map((recipe) => (
+        recipesToDisplay.map((recipe) => (
          <Recipe user={user} recipe ={recipe} onRemoveRecipe = {onRemoveRecipe} onUpdateRecipe = {onUpdateRecipe}/>
         ))
       ) : (

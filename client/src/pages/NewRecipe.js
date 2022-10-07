@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import ReactMarkdown from "react-markdown";
 import { Button, FormField, Input, Label, Textarea } from "../styles";
 
 function NewRecipe({ user }) {
@@ -34,16 +33,7 @@ function NewRecipe({ user }) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        // setName("Recipe title")
-        // setImage("Image url")
-        // setCategory("Recipe Category")
-        // setDescription("Recipe Description")
-        // setInstructions("Instructions")
-        // setIngredients("Ingredients")
-        // setErrors([])
-        history.push("/");
-       
-        
+        history.push("/")        
       } else {
         r.json().then((err) => setErrors(err.error));
       }

@@ -59,8 +59,7 @@ function Comment({myComment, user, recipe, setComments}) {
     
     return (
         <div>
-          <Label>Rating:</Label> 
-          <h4>{myComment.rating} / 5</h4>
+          <h4>Rating: {myComment.rating} / 5</h4>
           <Label>Comment: </Label>
           <p>{myComment.description}</p>
           <i>Created by: {user.username} </i>

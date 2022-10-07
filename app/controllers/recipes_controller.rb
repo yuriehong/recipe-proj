@@ -30,6 +30,12 @@ class RecipesController < ApplicationController
         head :no_content
     end
 
+    # def avgrating
+    #     sum = 0
+    #     comments =  Recipe.find(params[:id]).comments
+    #     comments.each{|comment| sum += comment.rating}
+    #     sum.fdiv(comments.size)
+    # end
     private 
     def recipe_params
        params.permit([:name, :image, :category, :description, :ingredients, :instructions, :user_id]) 

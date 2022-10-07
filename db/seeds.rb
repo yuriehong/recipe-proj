@@ -113,6 +113,30 @@ Once done, do not take the cream puffs out of the oven right away. Turn the oven
 
 })
 
+r4 = Recipe.create!({
+    name: "Brownies",
+    category: "Bars",
+    image: "https://thestayathomechef.com/wp-content/uploads/2022/01/Best-Brownies-Ever-5-500x500.jpg",
+    description: "These homemade brownies are the perfect chewy fudge squares of chocolate.",
+    ingredients:"10 tablespoons salted butter melted
+    1 cup granulated sugar
+    2 large eggs
+    2 teaspoons vanilla extract
+    1/2 cup melted milk chocolate chips
+    3/4 cup all-purpose flour
+    1/4 cup unsweetened cocoa powder
+    1/2 teaspoon salt
+    1 cup milk chocolate chips",
+    instructions:"Preheat oven to 350 degrees F. Line a metal 9x9 pan with parchment paper. 
+    Pour melted butter into a large mixing bowl. Whisk in sugar by hand until smooth, 30 seconds. 
+    Add in eggs and vanilla extract. Whisk 1 minute. 
+    Whisk in melted chocolate until combined and smooth. 
+    Use a rubber spatula to stir in flour, cocoa powder, and salt until just combined. Stir in whole chocolate chips. 
+    Pour into prepared pan and smooth out. 
+    Bake in the preheated oven for 30 minutes. Let cool in pan 30 minutes before slicing.",
+    user_id: u1.id
+
+})
 
 
 

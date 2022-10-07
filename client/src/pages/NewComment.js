@@ -9,8 +9,7 @@ function NewComment({ user, recipe, setComments, comments}) {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-console.log({recipe})
-console.log({user})
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
@@ -39,7 +38,6 @@ console.log({user})
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>Create Comment</h2>
         <form onSubmit={handleSubmit}>
           <FormField>
             <Label htmlFor="rating">Rating</Label>
