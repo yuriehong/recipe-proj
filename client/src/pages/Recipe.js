@@ -11,7 +11,6 @@ function Recipe({user, recipe, onRemoveRecipe, onUpdateRecipe}) {
     const [comments, setComments] = useState([])
     const [showForm, setShowForm] = useState(false)
 
-// const [isLoading, setIsLoading] = useState(false);
 
 //for the edit recipe form
 const [name, setName] = useState(recipe.name);
@@ -94,13 +93,15 @@ return (
       <p>
         <b>Category: {recipe.category}</b>
         &nbsp;·&nbsp;
-        <cite>By {user.username}</cite>
+        <br></br>
+        <cite>Created By: {user.username}</cite>
       </p>
       <p><b>Description</b>: {recipe.description}</p>
       <b>Ingredients:</b>
-      <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>
+      <ul>{recipe.ingredients.split("   ").map((ingredient) => <li>{ingredient}</li>)}</ul>
       <b>Instructions</b>
-      <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+      <ol>{recipe.instructions.split(". ").map((instruction) => <li>{instruction}</li>)}</ol>
+      
       <Button onClick= {handleComments}>{showComments ? "Hide Comments": "Show Comments"}</Button>
     
       <div >
@@ -108,7 +109,7 @@ return (
       </div>
       {!showComments ? 
       <Button id="newR" onClick = {handleNew}>New Comment</Button> : <p></p>}
-      {showForm ? <NewComment user = {user} recipe = {recipe} setComments = {setComments}/> : ""} 
+      {showForm ? <NewComment user = {user} recipe = {recipe} comments = {comments} setComments = {setComments}/> : ""} 
       
 
       {showEdit ? <div>
@@ -171,7 +172,7 @@ return (
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Finish Edit"}
+              Finish Edit
             </Button>
           </FormField>
           <FormField>             

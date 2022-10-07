@@ -1,17 +1,11 @@
 import React,{useState} from "react";
-import { Box,Button, FormField, Input, Label, Textarea } from "../styles";
+import { Button, Label } from "../styles";
 
-function Comment({myComment, user, handleDelete, recipe, setComments, comments}) {
+function Comment({myComment, user, recipe, setComments}) {
     const[showEdit, setShowEdit] = useState(false)
     const [rating, setRating] = useState(myComment.rating)
     const [description, setDescription] = useState(myComment.description)
 
-    // useEffect(() => {
-    //   fetch(`http://localhost:9292/users/${myReview.user_id}`)
-    //   .then(resp => resp.json())
-    //   .then(data => setUser(data))
-    //   },[])
-    
       //handling edit comment form submission
     function handleEdit(e){
       e.preventDefault()
@@ -31,12 +25,14 @@ function Comment({myComment, user, handleDelete, recipe, setComments, comments})
       })
       .then(res => res.json())
       .then(data => data)
+      setShowEdit(!showEdit)
+      // //resets comments
+      fetch(`/recipes/${recipe.id}`)
+    .then(resp => resp.json())
+    .then(data => setComments(data.comments))
 
-      fetch(`/comments`)
-      .then(resp => resp.json())
-      .then(data => setComments(data))
       
-     setShowEdit(!showEdit)
+     
 
     }
     //deleting comment
@@ -44,11 +40,20 @@ function Comment({myComment, user, handleDelete, recipe, setComments, comments})
         fetch(`/comments/${myComment.id}`, { method: "DELETE", })
         .then((r) => {
           if (r.ok) {
-            setComments([comments.filter((c) => c.id !== myComment.id)])          
+            fetch(`/recipes/${recipe.id}`)
+    .then(resp => resp.json())
+    .then(data => setComments(data.comments))
+          
         } else {
             r.json().then((err) => alert(err.error));
           }})
+
+
             }
+
+    function onEditClick(){
+      setShowEdit(!showEdit)
+    }
   
      
     
@@ -61,7 +66,7 @@ function Comment({myComment, user, handleDelete, recipe, setComments, comments})
           <i>Created by: {user.username} </i>
 
           <Button id = "button" onClick = {handleClick}>Delete Comment</Button> 
-          <Button id = "button" onClick = {handleEdit}>Edit Comment</Button> 
+          <Button id = "button" onClick = {onEditClick}>Edit Comment</Button> 
           {showEdit ? 
           <div className="form">
         <form onSubmit={handleEdit}>

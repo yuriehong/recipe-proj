@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button, FormField, Input, Label } from "../styles";
 
-function NewComment({ user, recipe}) {
+function NewComment({ user, recipe, setComments, comments}) {
   const [rating, setRating] = useState(0)
   const [description, setDescription] = useState("")
   const [errors, setErrors] = useState([]);
@@ -14,19 +14,20 @@ console.log({user})
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
+    let newComm = {rating,
+      description,
+      "recipe_id": recipe.id,
+      "user_id": user.id   }
     fetch("/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        rating,
-        description,
-        "recipe_id": recipe.id,
-      "user_id": user.id      }),
+      body: JSON.stringify(newComm),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
+        setComments([...comments, newComm])
         history.push("/");
         
       } else {
