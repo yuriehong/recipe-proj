@@ -2,9 +2,7 @@ class CommentsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
 
     before_action :authorize
-    skip_before_action :authorize, only: [:index,:show]
-
-    
+    skip_before_action :authorize, only: [:create,:destroy]
 
     def index
         comments = Comment.all

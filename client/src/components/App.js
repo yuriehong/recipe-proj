@@ -28,7 +28,7 @@ function App() {
             <NewRecipe user={user} />
           </Route>
           <Route path="/">
-            <RecipeList />
+            <RecipeList user ={user} />
           </Route>
         </Switch>
       </main>

@@ -74,13 +74,14 @@ function NewRecipe({ user }) {
             />
           </FormField>
           <FormField>
-            <Label htmlFor="category">Category</Label>
-            <Input
-              type="text"
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
+            <Label htmlFor = "category">Category</Label>
+          <select id="selectform" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="Cookies">Cookies</option>
+            <option value="Bars">Bars</option>
+            <option value="Cakes">Cakes</option>
+            <option value="Breads">Breads</option>
+            <option value="Other">Other</option>
+          </select>
           </FormField>
           <FormField>
             <Label htmlFor="description">Description</Label>
@@ -119,20 +120,7 @@ function NewRecipe({ user }) {
           </FormField>
         </form>
       </WrapperChild>
-      {/* <WrapperChild>
-        <h1>{name}</h1>
-        <div>
-        <p>
-          <em>Category: {category} </em>
-          &nbsp;·&nbsp;
-          <cite>By {user.username}</cite>
-        </p>
-        <p><em>Description</em>: {description}</p>
-        </div>
-
-        <ReactMarkdown>{ingredients}</ReactMarkdown>
-        <ReactMarkdown>{instructions}</ReactMarkdown>
-      </WrapperChild> */}
+      
     </Wrapper>
   );
 }

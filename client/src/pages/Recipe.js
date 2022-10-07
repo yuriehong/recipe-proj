@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box,Button, FormField, Input, Label, Textarea } from "../styles";
+import Comment from "./Comment.js"
+import NewComment from "./NewComment.js"
 
-function Recipe({recipe, onRemoveRecipe, onUpdateRecipe}) {
+function Recipe({user, recipe, onRemoveRecipe, onUpdateRecipe}) {
+    const [showComments, setShowComments] = useState(false)
+    const [comments, setComments] = useState([])
+    const [showForm, setShowForm] = useState(false)
 
-const [isLoading, setIsLoading] = useState(false);
+// const [isLoading, setIsLoading] = useState(false);
 
 //for the edit recipe form
 const [name, setName] = useState(recipe.name);
@@ -15,14 +20,34 @@ const [category, setCategory] = useState(recipe.category);
 const [description, setDescription] = useState(recipe.description);
 const [instructions, setInstructions] = useState(recipe.instructions);
 const [ingredients, setIngredients] = useState(recipe.ingredients);
-const [user, setUser] = useState(recipe.user);
 
 const [showEdit, setShowEdit] = useState(false);
 const [errors, setErrors] = useState([]);
 
+//Show comments for the recipe when show comment button is clicked
+function handleComments() {
+    if(showComments == false){
+    fetch(`/recipes/${recipe.id}`)
+    .then(resp => resp.json())
+    .then(data => setComments(data.comments))
+
+    }
+    else{
+      console.log("changing to none")
+      setComments([])
+      
+    }
+    setShowComments(!showComments)
+}
+
+//creates new comment
+
+function handleNew(){
+    setShowForm(!showForm)
+}
  //delete recipe method
  function handleDelete(e) {
-    e.preventDefault()
+    // e.preventDefault()
     fetch(`/recipes/${recipe.id}`, { method: "DELETE", })
     .then((r) => {
       if (r.ok) {
@@ -31,9 +56,9 @@ const [errors, setErrors] = useState([]);
         r.json().then((err) => alert(err.error));
       }})
     }
-
+//Edit recipe
     function handleEdit(e){
-      //updating review
+      //updating recipe
       e.preventDefault()
       fetch(`/recipes/${recipe.id}`, { 
       method : "PATCH",
@@ -47,7 +72,7 @@ const [errors, setErrors] = useState([]);
           description,
           ingredients,
           instructions,
-         user   }
+          "user_id": user.id   }
       )})
     .then((r) => {
       if (r.ok) {
@@ -62,18 +87,29 @@ return (
     <Rec key={recipe.id}>
     <Box>
       <Button onClick ={() => handleDelete()}>Delete</Button>
-      <Button onClick = {() => setShowEdit(!showEdit)}>Edit Recipe</Button>
+      <Button variant="outline" onClick = {() => setShowEdit(!showEdit)}>Edit Recipe</Button>
       
       <h2>{recipe.name}</h2>
-      <img  src ={recipe.image} width="500" height="500" alt = {recipe.name}/>
+      <img  src ={recipe.image} width="400" height="500" alt = {recipe.name}/>
       <p>
-        <em>Category: {recipe.category}</em>
+        <b>Category: {recipe.category}</b>
         &nbsp;·&nbsp;
-        {/* <cite>By {recipe.user}</cite> */}
+        <cite>By {user.username}</cite>
       </p>
-      <p><em>Description</em>: {recipe.description}</p>
+      <p><b>Description</b>: {recipe.description}</p>
+      <b>Ingredients:</b>
       <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>
+      <b>Instructions</b>
       <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+      <Button onClick= {handleComments}>{showComments ? "Hide Comments": "Show Comments"}</Button>
+    
+      <div >
+        <ul > {comments.map(comment => <Comment myComment={comment} user ={user} recipe = {recipe} setComments= {setComments} comments = {comments} key ={comment.id} />)} </ul>
+      </div>
+      {!showComments ? 
+      <Button id="newR" onClick = {handleNew}>New Comment</Button> : <p></p>}
+      {showForm ? <NewComment user = {user} recipe = {recipe} setComments = {setComments}/> : ""} 
+      
 
       {showEdit ? <div>
       <form onSubmit={handleEdit}>
@@ -97,12 +133,14 @@ return (
           </FormField>
           <FormField>
             <Label htmlFor="category">Category</Label>
-            <Input
-              type="text"
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
+          <select id="selectform" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="Cookies">Cookies</option>
+            <option value="Bars">Bars</option>
+            <option value="Cakes">Cakes</option>
+            <option value="Breads">Breads</option>
+            <option value="Other">Other</option>
+          </select>
+           
           </FormField>
           <FormField>
             <Label htmlFor="description">Description</Label>
@@ -133,7 +171,7 @@ return (
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Submit Recipe"}
+              {isLoading ? "Loading..." : "Finish Edit"}
             </Button>
           </FormField>
           <FormField>             

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Box, Button } from "../styles";
+import { Button } from "../styles";
 import Recipe from "./Recipe.js"
 
-function RecipeList() {
+function RecipeList({user}) {
   const [recipes, setRecipes] = useState([]);
 
 
 function onRemoveRecipe(recipe) {
-    setRecipes([recipes.filter((s) => s.id !== recipe.id)])
+    setRecipes(recipes.filter((s) => s.id !== recipe.id))
   }
 
 function onUpdateRecipe(){
@@ -30,7 +30,7 @@ function onUpdateRecipe(){
     <Wrapper>
       {recipes.length > 0 ? (
         recipes.map((recipe) => (
-         <Recipe recipe ={recipe} onRemoveRecipe = {onRemoveRecipe} onUpdateRecipe = {onUpdateRecipe}/>
+         <Recipe user={user} recipe ={recipe} onRemoveRecipe = {onRemoveRecipe} onUpdateRecipe = {onUpdateRecipe}/>
         ))
       ) : (
         <>
