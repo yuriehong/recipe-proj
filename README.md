@@ -22,8 +22,7 @@
 
 •run rails s to start up the server
 
-•run npm install, npm start --prefix client to start up the backend
-
+•run npm install, npm start --prefix client 
 
 •This application uses Rails 7.
 
