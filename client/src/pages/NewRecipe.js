@@ -41,9 +41,12 @@ function NewRecipe({ user }) {
   }
 
   return (
+    <Background>
     <Wrapper>
       <WrapperChild>
-        <h2>Create Recipe</h2>
+        <NewTitle id="newRecipe">
+          <u>Create Recipe</u>
+          </NewTitle>
         <form onSubmit={handleSubmit}>
           <FormField>
             <Label htmlFor="name">Name</Label>
@@ -112,16 +115,32 @@ function NewRecipe({ user }) {
       </WrapperChild>
       
     </Wrapper>
+    </Background>
   );
 }
 
 const Wrapper = styled.section`
-  max-width: 1000px;
-  margin: 40px auto;
+  max-width: 800px;
+  margin: 0px auto;
   padding: 16px;
   display: flex;
   gap: 24px;
+  background-color: lightgrey
+ 
 `;
+const NewTitle= styled.h2`
+  font-family: "Comic Sans";
+  font-size: 2rem;
+  color: black;
+  display: flex;
+  margin-left: 265px;
+  
+`;
+const Background = styled.section`
+  background: url("https://images.unsplash.com/photo-1681725142773-5756fad63e93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center 
+ 
+`;
+
 
 const WrapperChild = styled.div`
   flex: 1;

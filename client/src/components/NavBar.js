@@ -18,10 +18,14 @@ function NavBar({ user, setUser }) {
 
   return (
     <Wrapper>
-      <Logo>
-        <Link to="/">My Recipes</Link>
-      </Logo>
+      
       <Nav>
+      <Logo>
+        <Link to="/" className="link-text">My Recipes</Link>
+      </Logo>
+        <Logo>
+        <Link to="/about" className="link-text">About</Link>
+        </Logo>
         <Button as={Link} to="/new">
           New Recipe
         </Button>
@@ -33,13 +37,21 @@ function NavBar({ user, setUser }) {
     </Wrapper>
   );
 }
-
+// display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // padding: 8px;
 const Wrapper = styled.header`
+  
+  margin: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 8px;
+  justify-content: center;
+  background: #e9ecff;
+  font-family: "Roboto";
 `;
+
+
 
 const Logo = styled.h1`
   font-family: "Comic Sans";
@@ -47,18 +59,46 @@ const Logo = styled.h1`
   color: lightpink;
   margin: 0;
   line-height: 1;
+  
 
   a {
     color: inherit;
     text-decoration: none;
   }
+  a.active .link-text {
+    opacity: 1;
+    transition-delay: 0.1s;
+  }
+  .link-text {
+    z-index: 10;
+  width: 20%;
+  padding: 1em 0;
+  text-align: center;
+  cursor: pointer;
+  }
 `;
-
+//display: flex;
+  //gap: 4px;
+  //position: absolute;
+  //right: 8px;
 const Nav = styled.nav`
-  display: flex;
-  gap: 4px;
-  position: absolute;
-  right: 8px;
+    position: relative;
+    display: inline-flex;
+    background: white;
+    padding: 5px 200px 5px 200px;
+    gap: 100px;
+    margin: 1em 0;
+    box-shadow: 0 1em 2em rgba(black, .05);
+  
+  
+  Nav.black {
+    .underline {
+      background: #222;
+      border-radius: .25em;
+      height: calc(.5em / 2);
+      mix-blend-mode: initial;
+    }
+  }
 `;
 
 export default NavBar;
